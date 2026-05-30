@@ -520,7 +520,7 @@ func urutJadwalKosong(L arrLapangan, nLap int, T arrTransaksi, nTrans int) {
 	i := 0
 	for i < nJadwal {
 		fmt.Printf("- Pukul %02d:00 | %s | Rp%d\n", J[i].jam, J[i].namaLap, J[i].harga)
-		i++
+		i += 1
 	}
 	tahanLayar()
 }
