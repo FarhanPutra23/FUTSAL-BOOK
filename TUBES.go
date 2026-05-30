@@ -61,6 +61,34 @@ func main() {
 	var pilihan int
 	aplikasiJalan := true
 
+	// DATA DUMMY (Untuk keperluan testing)
+	// ==========================================
+	
+	// 1. Data Dummy Lapangan
+	dataL[0] = lapangan{1, 40000, "lapangan_1"}
+	dataL[1] = lapangan{2, 60000, "lapangan_2"}
+	dataL[2] = lapangan{3, 80000, "lapangan_3"}
+	dataL[3] = lapangan{4, 100000, "lapangan_4"}
+	dataL[4] = lapangan{5, 120000, "lapangan_5"}
+	nLap = 5
+
+	// 2. Data Dummy Penyewa
+	dataP[0] = dataPenyewa{1, "Budi", "08111222333"}
+	dataP[1] = dataPenyewa{2, "Andi", "08222333444"}
+	dataP[2] = dataPenyewa{3, "Citra", "08333444555"}
+	dataP[3] = dataPenyewa{4, "Dedi", "08444555666"}
+	dataP[4] = dataPenyewa{5, "Eka", "08555666777"}
+	nPenyewa = 5
+
+	// 3. Data Dummy Transaksi (Bulan 5 / Mei)
+	// Format struct: IDtransaksi, IDlapang, IDpenyewa, bulan, tanggal, jamMulai, durasi, total
+	dataT[0] = jadwalDANtransaksi{101, 1, 1, 5, 10, 10, 2, 80000}  // Budi sewa lapangan_1 (40rb x 2 jam)
+	dataT[1] = jadwalDANtransaksi{102, 2, 2, 5, 10, 14, 1, 60000}  // Andi sewa lapangan_2 (60rb x 1 jam)
+	dataT[2] = jadwalDANtransaksi{103, 3, 3, 5, 11, 19, 2, 160000} // Citra sewa lapangan_3 (80rb x 2 jam)
+	dataT[3] = jadwalDANtransaksi{104, 4, 4, 5, 12, 20, 2, 200000} // Dedi sewa lapangan_4 (100rb x 2 jam)
+	dataT[4] = jadwalDANtransaksi{105, 5, 5, 5, 12, 16, 1, 120000} // Eka sewa lapangan_5 (120rb x 1 jam)
+	nTrans = 5
+
 	for aplikasiJalan {
 		bersihkanLayar()
 		fmt.Println("==========================================")
