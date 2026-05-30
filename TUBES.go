@@ -140,7 +140,7 @@ func menuLapangan(L *arrLapangan, n *int) {
 		i := 0
 		for i < *n {
 			fmt.Printf("%d. ID: %d | Nama: %s | Harga/Jam: Rp%d\n", i+1, L[i].IDlapang, L[i].nama, L[i].harga)
-			i++
+			i += 1
 		}
 	}
 	fmt.Println("\nAksi:")
@@ -179,7 +179,7 @@ func menuLapangan(L *arrLapangan, n *int) {
 				ketemu = true
 				idx = j
 			}
-			j++
+			j += 1
 		}
 		if ketemu {
 			fmt.Print("Nama Baru: ")
@@ -203,13 +203,13 @@ func menuLapangan(L *arrLapangan, n *int) {
 				ketemu = true
 				idx = j
 			}
-			j++
+			j += 1
 		}
 		if ketemu {
 			k := idx
 			for k < *n-1 {
 				L[k] = L[k+1]
-				k++
+				k += 1
 			}
 			*n = *n - 1
 			fmt.Println("Data berhasil dihapus!")
@@ -228,7 +228,7 @@ func menuPenyewa(P *arrPenyewa, n *int) {
 		i := 0
 		for i < *n {
 			fmt.Printf("%d. ID: %d | Nama: %s | No.Tlp: %s\n", i+1, P[i].IDpenyewa, P[i].Nama, P[i].NoTlp)
-			i++
+			i += 1
 		}
 	}
 	fmt.Println("\nAksi:")
@@ -267,7 +267,7 @@ func menuPenyewa(P *arrPenyewa, n *int) {
 				ketemu = true
 				idx = j
 			}
-			j++
+			j += 1
 		}
 		if ketemu {
 			fmt.Print("Nama Baru: ")
@@ -291,13 +291,13 @@ func menuPenyewa(P *arrPenyewa, n *int) {
 				ketemu = true
 				idx = j
 			}
-			j++
+			j += 1
 		}
 		if ketemu {
 			k := idx
 			for k < *n-1 {
 				P[k] = P[k+1]
-				k++
+				k += 1
 			}
 			*n = *n - 1
 			fmt.Println("Data berhasil dihapus!")
@@ -342,7 +342,7 @@ func tambahTransaksi(T *arrTransaksi, nT *int, P arrPenyewa, nP int, L arrLapang
 					hargaPerJam = L[i].harga
 					ketemuLap = true
 				}
-				i++
+				i += 1
 			}
 
 			if ketemuLap {
@@ -384,7 +384,7 @@ func cariPenyewa(P *arrPenyewa, n int) {
 				fmt.Printf("\nDitemukan! ID: %d | Nama: %s | Tlp: %s\n", P[i].IDpenyewa, P[i].Nama, P[i].NoTlp)
 				ketemu = true
 			}
-			i++
+			i += 1
 		}
 		if !ketemu {
 			fmt.Println("Nama tidak ditemukan.")
@@ -402,10 +402,10 @@ func cariPenyewa(P *arrPenyewa, n int) {
 			j := i - 1
 			for j >= 0 && P[j].NoTlp > temp.NoTlp {
 				P[j+1] = P[j]
-				j--
+				j = j - 1
 			}
 			P[j+1] = temp
-			i++
+			i += 1
 		}
 
 		// Binary Search
@@ -463,18 +463,18 @@ func urutJadwalKosong(L arrLapangan, nLap int, T arrTransaksi, nTrans int) {
 						dipakai = true
 					}
 				}
-				iT++
+				iT += 1
 			}
 
 			if !dipakai {
 				J[nJadwal].jam = jam
 				J[nJadwal].namaLap = L[iLap].nama
 				J[nJadwal].harga = L[iLap].harga
-				nJadwal++
+				nJadwal += 1
 			}
-			jam++
+			jam += 1
 		}
-		iLap++
+		iLap += 1
 	}
 
 	fmt.Println("\nPilih Metode Pengurutan:")
@@ -495,12 +495,12 @@ func urutJadwalKosong(L arrLapangan, nLap int, T arrTransaksi, nTrans int) {
 				if J[j].jam < J[idxMin].jam {
 					idxMin = j
 				}
-				j++
+				j += 1
 			}
 			temp := J[i]
 			J[i] = J[idxMin]
 			J[idxMin] = temp
-			i++
+			i += 1
 		}
 	} else if pilUrut == 2 {
 		// Insertion Sort berdasarkan Harga
@@ -510,10 +510,10 @@ func urutJadwalKosong(L arrLapangan, nLap int, T arrTransaksi, nTrans int) {
 			j := i - 1
 			for j >= 0 && J[j].harga > temp.harga {
 				J[j+1] = J[j]
-				j--
+				j = j - 1
 			}
 			J[j+1] = temp
-			i++
+			i += 1
 		}
 	}
 	fmt.Println("\n--- HASIL JADWAL KOSONG ---")
@@ -550,10 +550,10 @@ func tampilStatistik(T arrTransaksi, n int) {
 				if (jam + k) < 24 {
 					frekJam[jam+k]++
 				}
-				k++
+				k += 1
 			}
 		}
-		i++
+		i += 1
 	}
 	jamTerlaris := 0
 	maxOrder := 0
@@ -563,7 +563,7 @@ func tampilStatistik(T arrTransaksi, n int) {
 			maxOrder = frekJam[i]
 			jamTerlaris = i
 		}
-		i++
+		i += 1
 	}
 	fmt.Println("\n--- HASIL STATISTIK ---")
 	fmt.Printf("Total Pendapatan Bulan %d : Rp %d\n", cariBulan, totalPendapatan)
