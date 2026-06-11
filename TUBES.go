@@ -63,7 +63,7 @@ func main() {
 
 	// DATA DUMMY (Untuk keperluan testing)
 	// ==========================================
-	
+
 	// 1. Data Dummy Lapangan
 	dataL[0] = lapangan{1, 40000, "lapangan_1"}
 	dataL[1] = lapangan{2, 60000, "lapangan_2"}
@@ -479,7 +479,8 @@ func urutJadwalKosong(L arrLapangan, nLap int, T arrTransaksi, nTrans int) {
 
 	fmt.Println("\nPilih Metode Pengurutan:")
 	fmt.Println("1. Berdasarkan Jam Mulai (Selection Sort - Ascending)")
-	fmt.Println("2. Berdasarkan Harga (Insertion Sort - Ascending)")
+	//Ubah ke Descending
+	fmt.Println("2. Berdasarkan Harga (Insertion Sort - Descending)")
 	fmt.Print("Pilih (1/2): ")
 
 	var pilUrut int
@@ -508,7 +509,7 @@ func urutJadwalKosong(L arrLapangan, nLap int, T arrTransaksi, nTrans int) {
 		for i < nJadwal {
 			temp := J[i]
 			j := i - 1
-			for j >= 0 && J[j].harga > temp.harga {
+			for j >= 0 && J[j].harga < temp.harga {
 				J[j+1] = J[j]
 				j = j - 1
 			}
@@ -568,7 +569,7 @@ func tampilStatistik(T arrTransaksi, n int) {
 	fmt.Println("\n--- HASIL STATISTIK ---")
 	fmt.Printf("Total Pendapatan Bulan %d : Rp %d\n", cariBulan, totalPendapatan)
 	if maxOrder > 0 {
-		fmt.Printf("Jam Paling Laris Bulan %d : Pukul %02d:00 (Disewa sebanyak %d jam)\n", cariBulan, jamTerlaris, maxOrder)
+		fmt.Printf("Jam Paling Laris Bulan %d : Pukul %02d:00 (Disewa sebanyak %d kali)\n", cariBulan, jamTerlaris, maxOrder)
 	} else {
 		fmt.Println("Belum ada data transaksi di bulan ini.")
 	}
