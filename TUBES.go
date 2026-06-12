@@ -79,7 +79,7 @@ func main() {
 	dataP[4] = dataPenyewa{5, "Eka", "08555666777"}
 	nPenyewa = 5
 
-	// 3. Data Dummy Transaksi (Bulan 5 / Mei)
+	// 3. Data Dummy Transaksi (Cuman Bulan 5 / Mei)
 	// IDtransaksi, IDlapang, IDpenyewa, bulan, tanggal, jamMulai, durasi, total
 	dataT[0] = jadwalDANtransaksi{101, 1, 1, 5, 10, 10, 2, 80000}  // Budi sewa lapangan_1 (40rb x 2 jam)
 	dataT[1] = jadwalDANtransaksi{102, 2, 2, 5, 10, 14, 1, 60000}  // Andi sewa lapangan_2 (60rb x 1 jam)
@@ -154,14 +154,30 @@ func menuLapangan(L *arrLapangan, n *int) {
 
 	if aksi == 1 {
 		if *n < NMAX {
+			var inputID int
 			fmt.Print("\nID Lapangan Baru: ")
-			fmt.Scan(&L[*n].IDlapang)
-			fmt.Print("Nama Lapangan: ")
-			fmt.Scan(&L[*n].nama)
-			fmt.Print("Harga Sewa Per Jam: Rp ")
-			fmt.Scan(&L[*n].harga)
-			*n = *n + 1
-			fmt.Println("Data berhasil ditambahkan!")
+			fmt.Scan(&inputID)
+
+			duplikat := false
+			j := 0
+			for j < *n && !duplikat {
+				if L[j].IDlapang == inputID {
+					duplikat = true
+				}
+				j += 1
+			}
+
+			if duplikat {
+				fmt.Println("Maaf, ID Lapangan tersebut sudah terdaftar! Silakan gunakan ID lain.")
+			} else {
+				L[*n].IDlapang = inputID
+				fmt.Print("Nama Lapangan: ")
+				fmt.Scan(&L[*n].nama)
+				fmt.Print("Harga Sewa Per Jam: Rp ")
+				fmt.Scan(&L[*n].harga)
+				*n = *n + 1
+				fmt.Println("Data berhasil ditambahkan!")
+			}
 		} else {
 			fmt.Println("Kapasitas penuh!")
 		}
@@ -243,14 +259,30 @@ func menuPenyewa(P *arrPenyewa, n *int) {
 
 	if aksi == 1 {
 		if *n < NMAX {
+			var inputID int
 			fmt.Print("\nID Penyewa Baru: ")
-			fmt.Scan(&P[*n].IDpenyewa)
-			fmt.Print("Nama Penyewa (Tanpa Spasi): ")
-			fmt.Scan(&P[*n].Nama)
-			fmt.Print("Nomor Telepon: ")
-			fmt.Scan(&P[*n].NoTlp)
-			*n = *n + 1
-			fmt.Println("Data berhasil ditambahkan!")
+			fmt.Scan(&inputID)
+
+			duplikat := false
+			j := 0
+			for j < *n && !duplikat {
+				if P[j].IDpenyewa == inputID {
+					duplikat = true
+				}
+				j += 1
+			}
+
+			if duplikat {
+				fmt.Println("Maaf, ID Penyewa tersebut sudah terdaftar! Silakan gunakan ID lain.")
+			} else {
+				P[*n].IDpenyewa = inputID
+				fmt.Print("Nama Penyewa (Tanpa Spasi): ")
+				fmt.Scan(&P[*n].Nama)
+				fmt.Print("Nomor Telepon: ")
+				fmt.Scan(&P[*n].NoTlp)
+				*n = *n + 1
+				fmt.Println("Data berhasil ditambahkan!")
+			}
 		} else {
 			fmt.Println("Kapasitas penuh!")
 		}
@@ -395,7 +427,7 @@ func cariPenyewa(P *arrPenyewa, n int) {
 		fmt.Print("Masukkan No HP: ")
 		fmt.Scan(&cariNo)
 
-		// Insertion Sort Ascending berdasarkan NoTlp untuk syarat Binary Search
+		// Insertion Sort Ascending berdasarkan No.Telepon menggunakan Binary Search
 		i := 1
 		for i < n {
 			temp := P[i]
