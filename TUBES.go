@@ -7,7 +7,7 @@ import (
 const NMAX = 100
 
 // ==========================================
-// DEKLARASI STRUCT & ARRAY
+// STRUCT & ARRAY
 // ==========================================
 type lapangan struct {
 	IDlapang, harga int
@@ -62,7 +62,6 @@ func main() {
 	aplikasiJalan := true
 
 	// DATA DUMMY (Untuk keperluan testing)
-	// ==========================================
 
 	// 1. Data Dummy Lapangan
 	dataL[0] = lapangan{1, 40000, "lapangan_1"}
@@ -81,7 +80,7 @@ func main() {
 	nPenyewa = 5
 
 	// 3. Data Dummy Transaksi (Bulan 5 / Mei)
-	// Format struct: IDtransaksi, IDlapang, IDpenyewa, bulan, tanggal, jamMulai, durasi, total
+	// IDtransaksi, IDlapang, IDpenyewa, bulan, tanggal, jamMulai, durasi, total
 	dataT[0] = jadwalDANtransaksi{101, 1, 1, 5, 10, 10, 2, 80000}  // Budi sewa lapangan_1 (40rb x 2 jam)
 	dataT[1] = jadwalDANtransaksi{102, 2, 2, 5, 10, 14, 1, 60000}  // Andi sewa lapangan_2 (60rb x 1 jam)
 	dataT[2] = jadwalDANtransaksi{103, 3, 3, 5, 11, 19, 2, 160000} // Citra sewa lapangan_3 (80rb x 2 jam)
@@ -129,7 +128,7 @@ func main() {
 }
 
 // ==========================================
-// FUNGSI MENU CRUD (Disatukan Biar Rapi)
+// FUNGSI MENU CRUD
 // ==========================================
 func menuLapangan(L *arrLapangan, n *int) {
 	bersihkanLayar()
@@ -219,6 +218,7 @@ func menuLapangan(L *arrLapangan, n *int) {
 		tahanLayar()
 	}
 }
+
 func menuPenyewa(P *arrPenyewa, n *int) {
 	bersihkanLayar()
 	fmt.Println("--- KELOLA DATA PENYEWA ---")
@@ -309,7 +309,7 @@ func menuPenyewa(P *arrPenyewa, n *int) {
 }
 
 // ==========================================
-// TRANSAKSI SEWA (Poin b)
+// TRANSAKSI SEWA
 // ==========================================
 func tambahTransaksi(T *arrTransaksi, nT *int, P arrPenyewa, nP int, L arrLapangan, nL int) {
 	bersihkanLayar()
@@ -360,7 +360,7 @@ func tambahTransaksi(T *arrTransaksi, nT *int, P arrPenyewa, nP int, L arrLapang
 }
 
 // ==========================================
-// SEARCHING (Poin c)
+// SEARCHING
 // ==========================================
 func cariPenyewa(P *arrPenyewa, n int) {
 	bersihkanLayar()
@@ -434,7 +434,7 @@ func cariPenyewa(P *arrPenyewa, n int) {
 }
 
 // ==========================================
-// SORTING JADWAL KOSONG (Poin d)
+// SORTING JADWAL KOSONG
 // ==========================================
 func urutJadwalKosong(L arrLapangan, nLap int, T arrTransaksi, nTrans int) {
 	bersihkanLayar()
@@ -487,7 +487,7 @@ func urutJadwalKosong(L arrLapangan, nLap int, T arrTransaksi, nTrans int) {
 	fmt.Scan(&pilUrut)
 
 	if pilUrut == 1 {
-		// Selection Sort berdasarkan Jam
+		// Selection Sort (Ascending) berdasarkan Jam
 		i := 0
 		for i < nJadwal-1 {
 			idxMin := i
@@ -504,7 +504,7 @@ func urutJadwalKosong(L arrLapangan, nLap int, T arrTransaksi, nTrans int) {
 			i += 1
 		}
 	} else if pilUrut == 2 {
-		// Insertion Sort berdasarkan Harga
+		// Insertion Sort (Descending) berdasarkan Harga
 		i := 1
 		for i < nJadwal {
 			temp := J[i]
@@ -527,7 +527,7 @@ func urutJadwalKosong(L arrLapangan, nLap int, T arrTransaksi, nTrans int) {
 }
 
 // ==========================================
-// STATISTIK (Poin e)
+// STATISTIK
 // ==========================================
 func tampilStatistik(T arrTransaksi, n int) {
 	bersihkanLayar()
@@ -549,7 +549,7 @@ func tampilStatistik(T arrTransaksi, n int) {
 			k := 0
 			for k < T[i].durasi {
 				if (jam + k) < 24 {
-					frekJam[jam+k]++
+					frekJam[jam+k] += 1
 				}
 				k += 1
 			}
